@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="RSVP">
+
+<head>
+    <title>RSVP</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    <script src="oauth-signature.js"></script>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body ng-controller="YelpCtrl as yelp">
+    <form ng-submit="yelp.testApi()">
+        <select ng-options='category as category for category in yelp.categories' ng-model='yelp.category'></select>
+        <input ng-model="yelp.term" type="text" placeholder="Enter seach term">
+        <input ng-model="yelp.location" type="text" placeholder="Enter Location or Zipcode">
+        <button type="submit">Search</button>
+    </form>
+
+    <ul ng-repeat='business in yelp.data.businesses'>
+        <li>
+            <a ng-href="{{business.url}}"><b>{{business.name}}</b></a>
+        </li>
+        <li ng-repeat='line in business.location.display_address'>
+            {{line}}
+        </li>
+        <li>
+            <img style='height:250px; width:250px' ng-src="{{business.image_url}}" />
+        </li>
+        <li>Business #: {{business.display_phone}}</li>
+        <li>Rating: {{business.rating}} <img ng-src="{{business.rating_img_url_large}}" /></li>
+        <li>
+            <img ng-src="{{business.snippet_image_url}}" /> Recent Reviews: {{business.snippet_text}}
+        </li>
+    </ul>
+    <footer>
+    </footer>
+</body>
+
+</html>
