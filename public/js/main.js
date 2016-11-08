@@ -7,7 +7,12 @@ function yelpController($http) {
     var yelp = this;
     yelp.categories = ['nightlife', 'food', 'arts'];
 
+    console.log("TEST");
+
     yelp.testApi = function() {
+
+        console.log("test api firing");
+
         var callbackID = angular.callbacks.$$counter.toString(36);
         var method = 'GET';
         var url = 'http://api.yelp.com/v2/search';

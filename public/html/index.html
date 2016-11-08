@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html ng-app="RSVP">
+
+<head>
+    <title>RSVP</title>
+    <!--script tags go here  -->
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js'></script>
+    <script src="js/oauth-signature.js"></script>
+    <script src="js/main.js"></script>
+
+    <!--link tags go here  -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel='shortcut icon' href='html/rsvp-favicon.ico' type='image/x-icon' />
+</head>
+
+<body ng-controller="YelpCtrl as yelp">
+    <!--Navbar goes here-->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <!-- <li><i class='fa fa-envelope fa-2x'></i></li> -->
+                <a class="navbar-brand" href="#"> RSVP</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">SERVICES</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> JOIN</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> LOG IN</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!--Carousel goes here-->
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="..." alt="...">
+                <div class="carousel-caption">
+                    ...
+                </div>
+            </div>
+            <div class="item">
+                <img src="..." alt="...">
+                <div class="carousel-caption">
+                    ...
+                </div>
+            </div>
+            ...
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <!--Jumbotron goes here-->
+
+    <header class="jumbotron">
+        <h1>RSVP</h1>
+    </header>
+    <!--Seach option goes here-->
+    <form ng-submit="yelp.testApi()">
+        <select class='form-control' ng-options='category as category for category in yelp.categories' ng-model='yelp.category'>
+            <option value="" disabled selected>Please Select</option>
+        </select>
+        <input class='form-control' ng-model="yelp.term" type="text" placeholder="I'm looking for...">
+        <!-- <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Food</a></li>
+                <li><a href="#">Nightlife</a></li>
+                <li><a href="#">Fun</a></li>
+                <li><a href="#">Sights</a></li>
+            </ul>
+        </div> -->
+
+
+        <input class='form-control' ng-model="yelp.location" type="text" placeholder="Enter City or Zipcode">
+
+        <button class='btn btn-success btn-lg btn-block active' type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+    </form>
+    <!--Search buttons goes here-->
+    <ul class="nav nav-pills">
+        <li>
+            <a href="#">
+                <span class="fa fa-cutlery fa-4x"></span> Food
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="fa fa-glass fa-4x"></span> Nightlife
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='fa fa-ticket fa-4x'></i> Fun
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='fa fa-binoculars fa-4x'></i> Sights
+            </a>
+        </li>
+    </ul>
+
+    <!--Search Results go here-->
+    <ul class='well' ng-repeat='business in yelp.data.businesses'>
+        <li>
+            <a ng-href="{{business.url}}"><b>{{business.name}}</b></a>
+        </li>
+        <li ng-repeat='line in business.location.display_address'>
+            {{line}}
+        </li>
+        <li>
+            <img style='height:250px; width:250px' ng-src="{{business.image_url}}" />
+        </li>
+        <li>Business #: {{business.display_phone}}</li>
+        <li>Rating: {{business.rating}} <img ng-src="{{business.rating_img_url_large}}" /></li>
+        <li>
+            <img ng-src="{{business.snippet_image_url}}" /> Recent Reviews: {{business.snippet_text}}
+        </li>
+
+    </ul>
+    <footer>
+    </footer>
+</body>
+
+</html>

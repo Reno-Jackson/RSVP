@@ -1,0 +1,28 @@
+{
+  "name": "rsvp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reno-Jackson/RSVP.git"
+  },
+  "author": "joshua",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Reno-Jackson/RSVP/issues"
+  },
+  "homepage": "https://github.com/Reno-Jackson/RSVP#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "colors": "^1.1.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.6",
+    "morgan": "^1.7.0"
+  }
+}
